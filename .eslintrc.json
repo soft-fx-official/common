@@ -5,20 +5,29 @@
     "jest": true
   },
   "extends": [
+    "plugin:react/recommended",
     "airbnb",
     "airbnb-typescript",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest",
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
   "plugins": [
+    "react",
     "@typescript-eslint",
     "react-hooks",
     "prettier"
   ],
-  "rules": {}
+  "rules": {
+    "react/destructuring-assignment": "warn",
+    "consistent-return": "warn",
+    "@typescript-eslint/no-unused-vars": "warn"
+  }
 }

@@ -1,9 +1,3 @@
-import bus from './bus'
-import storage from './storage'
-import loadDynamicComponent from './loadDynamicComponent'
+import Bus from './bus'
 
-export default {
-  bus,
-  storage,
-  loadDynamicComponent,
-}
+export default Bus
