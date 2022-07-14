@@ -4,15 +4,18 @@ const { dependencies } = require('./package.json')
 module.exports = {
   webpack: function(webpackConfig, env) {
     webpackConfig.output.publicPath = 'auto'
-    webpackConfig.output.uniqueName = 'common1'
+    webpackConfig.output.uniqueName = 'common'
 
     webpackConfig.plugins = [
       ...webpackConfig.plugins,
       new ModuleFederationPlugin({
-        name: 'common1',
+        name: 'common',
         filename: 'remoteEntry.js',
         exposes: {
-          './hooks': './src/hooks'
+          './hooks': './src/hooks',
+          './bus': './src/common/bus',
+          './storage': './src/common/storage',
+          './loadDynamicComponent': './src/common/loadDynamicComponent'
         },
         remotes: {},
         shared: {
