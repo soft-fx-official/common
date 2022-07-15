@@ -1,8 +1,8 @@
-const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin
+const { ModuleFederationPlugin } = require('webpack').container
 const { dependencies } = require('./package.json')
 
 module.exports = {
-  webpack: function(webpackConfig, env) {
+  webpack: function (webpackConfig, env) {
     webpackConfig.output.publicPath = 'auto'
     webpackConfig.output.uniqueName = 'common'
 
@@ -15,12 +15,12 @@ module.exports = {
           './hooks': './src/hooks',
           './bus': './src/common/bus',
           './storage': './src/common/storage',
-          './loadDynamicComponent': './src/common/loadDynamicComponent'
+          './loadDynamicComponent': './src/common/loadDynamicComponent',
         },
         remotes: {},
         shared: {
           ...dependencies,
-          'react': {
+          react: {
             singleton: true,
             requiredVersion: dependencies['react'],
           },
@@ -28,9 +28,9 @@ module.exports = {
             singleton: true,
             requiredVersion: dependencies['react-dom'],
           },
-          "react-router-dom": {
+          'react-router-dom': {
             singleton: true,
-            requiredVersion: dependencies["react-router-dom"],
+            requiredVersion: dependencies['react-router-dom'],
           },
         },
       }),
