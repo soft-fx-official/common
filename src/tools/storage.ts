@@ -1,6 +1,12 @@
 import { get, set, unset } from 'lodash'
 
-type TValue = string | number | boolean | null | Array<TValue> | { [key: string]: TValue }
+type TStorageValue =
+  | string
+  | number
+  | boolean
+  | null
+  | Array<TStorageValue>
+  | { [key: string]: TStorageValue }
 
 interface IStorage {
   setItem: (key: string, value: string) => void
@@ -11,13 +17,14 @@ interface IStorage {
 interface IBaseStorage {
   readonly namespace: string
 
-  get: (path: string) => TValue
-  set: (path: string, value: TValue) => this
+  get: (path: string) => TStorageValue
+  set: (path: string, value: TStorageValue) => this
   remove: (path: string) => this
   clear: () => this
 }
 
-// NOTE: The data structure may change over time in new versions of the application. Needs to be improved!
+// NOTE: The data structure may change over time in new versions of the application.
+// Needs to be improved!
 class BaseStorage implements IBaseStorage {
   readonly namespace: string
 
@@ -37,11 +44,11 @@ class BaseStorage implements IBaseStorage {
     }
   }
 
-  get(path: string): TValue {
+  get(path: string): TStorageValue {
     return get(this.data, path, null)
   }
 
-  set(path: string, value: TValue): this {
+  set(path: string, value: TStorageValue): this {
     set(this.data, path, value)
     try {
       this.storage.setItem(this.namespace, JSON.stringify(this.data))
@@ -69,4 +76,4 @@ class BaseStorage implements IBaseStorage {
 }
 
 export default BaseStorage
-export type { IStorage, IBaseStorage, TValue }
+export type { IBaseStorage, IStorage, TStorageValue }

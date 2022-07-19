@@ -59,4 +59,4 @@ class Bus implements IBus {
 }
 
 export default Bus
-export type { IBus, TBusValues, TBusArgs, TBusGetData, TBusData, TBusEventCallback, TBusEvents }
+export type { IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues }

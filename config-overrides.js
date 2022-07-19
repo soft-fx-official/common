@@ -13,9 +13,7 @@ module.exports = {
         filename: 'remoteEntry.js',
         exposes: {
           './hooks': './src/hooks',
-          './bus': './src/common/bus',
-          './storage': './src/common/storage',
-          './loadDynamicComponent': './src/common/loadDynamicComponent',
+          './tools': './src/tools',
         },
         remotes: {},
         shared: {

@@ -1,5 +1,5 @@
-import useTimer from './useTimer'
 import useCreateForm from './useCreateForm'
 import useDynamicScript from './useDynamicScript'
+import useTimer from './useTimer'
 
-export { useTimer, useCreateForm, useDynamicScript }
+export { useCreateForm, useDynamicScript, useTimer }
