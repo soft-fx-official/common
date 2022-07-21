@@ -43,4 +43,4 @@ const useDynamicScript = (url: string): IUseDynamicScriptR => {
   return { ready, failed }
 }
 
-export default useDynamicScript
+export { useDynamicScript }

@@ -1,4 +1,5 @@
-import Bus, {
+import {
+  Bus,
   IBus,
   TBusArgs,
   TBusData,
@@ -7,10 +8,10 @@ import Bus, {
   TBusGetData,
   TBusValues,
 } from './bus'
-import loadDynamicComponent from './loadDynamicComponent'
-import BaseStorage, { IBaseStorage, IStorage, TStorageValue } from './storage'
+import { loadDynamicComponent } from './loadDynamicComponent'
+import { IBaseStorage, IStorage, Storage, TStorageValue } from './storage'
 
-export { BaseStorage, Bus, loadDynamicComponent }
+export { Bus, loadDynamicComponent, Storage }
 export type {
   IBaseStorage,
   IBus,

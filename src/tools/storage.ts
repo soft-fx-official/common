@@ -75,5 +75,5 @@ class BaseStorage implements IBaseStorage {
   }
 }
 
-export default BaseStorage
+export { BaseStorage as Storage }
 export type { IBaseStorage, IStorage, TStorageValue }

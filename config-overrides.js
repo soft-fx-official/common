@@ -1,4 +1,5 @@
 const { ModuleFederationPlugin } = require('webpack').container
+const FederatedTypesPlugin = require('wmftypes')
 const { dependencies } = require('./package.json')
 
 module.exports = {
@@ -12,8 +13,8 @@ module.exports = {
         name: 'common',
         filename: 'remoteEntry.js',
         exposes: {
-          './hooks': './src/hooks',
-          './tools': './src/tools',
+          './hooks': './src/hooks/index.ts',
+          './tools': './src/tools/index.ts',
         },
         remotes: {},
         shared: {
@@ -32,6 +33,7 @@ module.exports = {
           },
         },
       }),
+      new FederatedTypesPlugin(),
     ]
 
     return webpackConfig

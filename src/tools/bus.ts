@@ -58,5 +58,5 @@ class Bus implements IBus {
   }
 }
 
-export default Bus
+export { Bus }
 export type { IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues }
