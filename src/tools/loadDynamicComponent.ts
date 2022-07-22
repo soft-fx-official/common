@@ -14,4 +14,4 @@ function loadDynamicComponent(scope: string, module: string) {
   }
 }
 
-export default loadDynamicComponent
+export { loadDynamicComponent }

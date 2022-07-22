@@ -2,10 +2,11 @@
 
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 
-function useCreateForm(yupObject, mode = 'onChange') {
+import { yupResolver } from '@hookform/resolvers/yup'
+
+const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
   const [isLoad, setIsLoad] = React.useState(false)
   const {
     control,
@@ -17,19 +18,19 @@ function useCreateForm(yupObject, mode = 'onChange') {
     mode,
   })
 
-  const setErrors = fields => {
+  const setErrors = (fields: any) => {
     Object.keys(fields).forEach(field => setError(field, { message: fields[field] }))
   }
 
-  const submit = (onSubmit, callbacks) =>
+  const submit = (onSubmit: any, callbacks: any) =>
     handleSubmit(data => {
       setIsLoad(true)
       onSubmit(data)
-        .then(result => {
+        .then((result: any) => {
           setIsLoad(false)
           if (callbacks?.onSuccess) callbacks.onSuccess(result)
         })
-        .catch(error => {
+        .catch((error: any) => {
           setIsLoad(false)
           if (callbacks?.onError) callbacks.onError(error, setErrors)
         })
@@ -38,4 +39,4 @@ function useCreateForm(yupObject, mode = 'onChange') {
   return { isLoad, control, errors, submit, isValid }
 }
 
-export default useCreateForm
+export { useCreateForm }
