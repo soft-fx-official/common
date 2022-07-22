@@ -6,7 +6,7 @@ import * as yup from 'yup'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-function useCreateForm(yupObject: any, mode: any = 'onChange') {
+const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
   const [isLoad, setIsLoad] = React.useState(false)
   const {
     control,

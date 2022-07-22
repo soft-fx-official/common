@@ -13,8 +13,8 @@ module.exports = {
         name: 'common',
         filename: 'remoteEntry.js',
         exposes: {
-          './hooks': './src/hooks/index.ts',
-          './tools': './src/tools/index.ts',
+          './hooks': './src/hooks',
+          './tools': './src/tools',
         },
         remotes: {},
         shared: {

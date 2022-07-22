@@ -1,6 +1,10 @@
 declare module 'common/hooks' {
+import { useCreateForm } from './useCreateForm';
+import { useDynamicScript } from './useDynamicScript';
+import { useTimer } from './useTimer';
+export { useCreateForm, useDynamicScript, useTimer };
 
-declare function useCreateForm(yupObject: any, mode?: any): {
+declare const useCreateForm: (yupObject: any, mode?: any) => {
     isLoad: any;
     control: import("react-hook-form").Control<import("react-hook-form").FieldValues, object>;
     errors: import("react-hook-form").FieldErrorsImpl<import("react-hook-form").DeepRequired<import("react-hook-form").FieldValues>>;
@@ -38,11 +42,11 @@ declare type TBusEvents = {
 };
 interface IBus {
     events: TBusEvents;
-    data: TBusData;
+    data?: TBusData;
     on: (name: string, callback: TBusEventCallback) => void;
     say: (name: string, args: TBusArgs) => void;
     save: (name: string, getData: TBusGetData) => void;
-    get: (name: string, dataDefault: TBusValues | null) => TBusValues | null;
+    get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null;
     getAll: (name: string) => Array<TBusValues>;
 }
 declare class Bus implements IBus {
@@ -58,6 +62,11 @@ declare class Bus implements IBus {
 export { Bus };
 export type { IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues };
 
+import { Bus, IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues } from './bus';
+import { loadDynamicComponent } from './loadDynamicComponent';
+import { IBaseStorage, IStorage, Storage, TStorageValue } from './storage';
+export { Bus, loadDynamicComponent, Storage };
+export type { IBaseStorage, IBus, IStorage, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues, TStorageValue, };
 
 declare function loadDynamicComponent(scope: string, module: string): () => Promise<any>;
 export { loadDynamicComponent };

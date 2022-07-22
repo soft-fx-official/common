@@ -13,11 +13,11 @@ type TBusEvents = { [name: string]: Array<TBusEventCallback> }
 
 interface IBus {
   events: TBusEvents
-  data: TBusData
+  data?: TBusData
   on: (name: string, callback: TBusEventCallback) => void
   say: (name: string, args: TBusArgs) => void
   save: (name: string, getData: TBusGetData) => void
-  get: (name: string, dataDefault: TBusValues | null) => TBusValues | null
+  get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null
   getAll: (name: string) => Array<TBusValues>
 }
 
