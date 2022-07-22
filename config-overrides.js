@@ -1,21 +1,19 @@
 const { ModuleFederationPlugin } = require('webpack').container
 const FederatedTypesPlugin = require('wmftypes')
 const { dependencies } = require('./package.json')
+const config = require('./src/config')
 
 module.exports = {
   webpack: function (webpackConfig, env) {
     webpackConfig.output.publicPath = 'auto'
-    webpackConfig.output.uniqueName = 'common'
+    webpackConfig.output.uniqueName = config.appName
 
     webpackConfig.plugins = [
       ...webpackConfig.plugins,
       new ModuleFederationPlugin({
-        name: 'common',
+        name: config.appName,
         filename: 'remoteEntry.js',
-        exposes: {
-          './hooks': './src/hooks',
-          './tools': './src/tools',
-        },
+        exposes: config.exposes,
         remotes: {},
         shared: {
           ...dependencies,
