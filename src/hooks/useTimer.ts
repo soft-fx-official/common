@@ -1,6 +1,6 @@
 import React from 'react'
 
-function useTimer(start: number, onStop: () => void, tactMs: number = 1000): number {
+const useTimer = (start: number, onStop: () => void, tactMs: number = 1000): number => {
   const isInc = start < 0
   const stop = isInc ? 0 : start
   const current = Math.abs(isInc ? start : 0)
@@ -28,4 +28,4 @@ function useTimer(start: number, onStop: () => void, tactMs: number = 1000): num
   return count
 }
 
-export default useTimer
+export { useTimer }

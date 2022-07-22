@@ -1,0 +1,8 @@
+{
+  "appName": "common",
+  "debug": false,
+  "exposes": {
+    "./hooks": "./src/hooks",
+    "./tools": "./src/tools"
+  }
+}

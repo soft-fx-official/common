@@ -2,12 +2,14 @@ image: registry.soft-fx.lv/com/docker/node:16.13.0-alpine.build
 
 variables:
   GIT_SSL_NO_VERIFY: 1
+  GIT_SUBMODULE_STRATEGY: recursive
 
 build:
   stage: build
   script:
+    - cd ./trunk
     - npm install && npm run build
-    - s3cmd --host=${AWS_S3_HOST} --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}
+    - s3cmd --host=${AWS_S3_HOST} --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST} 
       --signature-v2 --progress --no-preserve --recursive --force --acl-public --no-check-certificate --delete-removed --no-mime-magic --guess-mime-type
-      sync ./build/
+      sync ./public/
       s3://${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/

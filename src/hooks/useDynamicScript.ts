@@ -34,15 +34,13 @@ const useDynamicScript = (url: string): IUseDynamicScriptR => {
 
     document.head.appendChild(element)
 
-    /* eslint-disable consistent-return */
     return () => {
       console.info(`[INFO][DYNAMIC SCRIPT][REMOVED]: ${url}`)
       document.head.removeChild(element)
     }
-    /* eslint-enable consistent-return */
   }, [url])
 
   return { ready, failed }
 }
 
-export default useDynamicScript
+export { useDynamicScript }
