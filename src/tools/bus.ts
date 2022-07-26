@@ -1,4 +1,4 @@
-type TBusValues = number | string | Array<TBusValues> | { [name: string]: TBusValues }
+type TBusValues = number | string | Array<TBusValues> | { [name: string]: any }
 
 // NOTE: any?
 type TBusArgs = { [name: string]: any }
@@ -7,7 +7,7 @@ type TBusGetData = () => TBusValues
 
 type TBusData = { [name: string]: Array<TBusGetData> }
 
-type TBusEventCallback = (args: TBusArgs) => void
+type TBusEventCallback = (args?: TBusArgs) => void
 
 type TBusEvents = { [name: string]: Array<TBusEventCallback> }
 
@@ -15,7 +15,7 @@ interface IBus {
   events: TBusEvents
   data?: TBusData
   on: (name: string, callback: TBusEventCallback) => void
-  say: (name: string, args: TBusArgs) => void
+  say: (name: string, args?: TBusArgs) => void
   save: (name: string, getData: TBusGetData) => void
   get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null
   getAll: (name: string) => Array<TBusValues>
@@ -37,7 +37,7 @@ class Bus implements IBus {
     this.events[name].push(callback)
   }
 
-  say = (name: string, args: TBusArgs): void => {
+  say = (name: string, args?: TBusArgs): void => {
     if (!(name in this.events)) return
     this.events[name].forEach((callback: TBusEventCallback) => callback(args))
   }
