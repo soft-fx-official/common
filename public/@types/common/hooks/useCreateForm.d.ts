@@ -4,5 +4,6 @@ declare const useCreateForm: (yupObject: any, mode?: any) => {
     errors: import("react-hook-form").FieldErrorsImpl<import("react-hook-form").DeepRequired<import("react-hook-form").FieldValues>>;
     submit: (onSubmit: any, callbacks: any) => Promise<void>;
     isValid: boolean;
+    getValues: import("react-hook-form").UseFormGetValues<import("react-hook-form").FieldValues>;
 };
 export { useCreateForm };

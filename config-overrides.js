@@ -1,5 +1,5 @@
 const { ModuleFederationPlugin } = require('webpack').container
-const FederatedTypesPlugin = require('wmftypes')
+const W5MFTypesPlugin = require('w5mf-types')
 const { dependencies } = require('./package.json')
 const config = require('./src/config')
 
@@ -31,7 +31,7 @@ module.exports = {
           },
         },
       }),
-      new FederatedTypesPlugin(),
+      new W5MFTypesPlugin(),
     ]
 
     return webpackConfig

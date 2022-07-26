@@ -1,8 +1,9 @@
 declare module 'common/hooks' {
 import { useCreateForm } from './useCreateForm';
 import { useDynamicScript } from './useDynamicScript';
+import { useHttpErrorHandler } from './useHttpErrorHandler';
 import { useTimer } from './useTimer';
-export { useCreateForm, useDynamicScript, useTimer };
+export { useCreateForm, useDynamicScript, useHttpErrorHandler, useTimer };
 
 declare const useCreateForm: (yupObject: any, mode?: any) => {
     isLoad: any;
@@ -10,6 +11,7 @@ declare const useCreateForm: (yupObject: any, mode?: any) => {
     errors: import("react-hook-form").FieldErrorsImpl<import("react-hook-form").DeepRequired<import("react-hook-form").FieldValues>>;
     submit: (onSubmit: any, callbacks: any) => Promise<void>;
     isValid: boolean;
+    getValues: import("react-hook-form").UseFormGetValues<import("react-hook-form").FieldValues>;
 };
 export { useCreateForm };
 
@@ -20,6 +22,13 @@ interface IUseDynamicScriptR {
 declare const useDynamicScript: (url: string) => IUseDynamicScriptR;
 export { useDynamicScript };
 
+declare type UseHttpErrorHandlerProps = {
+    errorKey?: 'target' | 'code';
+    modelFieldDictionary?: Record<string, string>;
+};
+declare const useHttpErrorHandler: ({ errorKey, modelFieldDictionary, }: UseHttpErrorHandlerProps) => (error: any, setError: (errors: Record<string, string>) => void) => void;
+export { useHttpErrorHandler };
+
 declare const useTimer: (start: number, onStop: () => void, tactMs?: number) => number;
 export { useTimer };
 
@@ -27,7 +36,7 @@ export { useTimer };
 
 declare module 'common/tools' {
 declare type TBusValues = number | string | Array<TBusValues> | {
-    [name: string]: TBusValues;
+    [name: string]: any;
 };
 declare type TBusArgs = {
     [name: string]: any;
@@ -36,7 +45,7 @@ declare type TBusGetData = () => TBusValues;
 declare type TBusData = {
     [name: string]: Array<TBusGetData>;
 };
-declare type TBusEventCallback = (args: TBusArgs) => void;
+declare type TBusEventCallback = (args?: TBusArgs) => void;
 declare type TBusEvents = {
     [name: string]: Array<TBusEventCallback>;
 };
@@ -44,7 +53,7 @@ interface IBus {
     events: TBusEvents;
     data?: TBusData;
     on: (name: string, callback: TBusEventCallback) => void;
-    say: (name: string, args: TBusArgs) => void;
+    say: (name: string, args?: TBusArgs) => void;
     save: (name: string, getData: TBusGetData) => void;
     get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null;
     getAll: (name: string) => Array<TBusValues>;
@@ -54,7 +63,7 @@ declare class Bus implements IBus {
     data: TBusData;
     constructor(events?: TBusEvents, data?: TBusData);
     on: (name: string, callback: TBusEventCallback) => void;
-    say: (name: string, args: TBusArgs) => void;
+    say: (name: string, args?: TBusArgs) => void;
     save: (name: string, getData: TBusGetData) => void;
     get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null;
     getAll: (name: string) => Array<TBusValues>;
