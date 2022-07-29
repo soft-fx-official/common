@@ -1,4 +1,4 @@
-image: registry.soft-fx.lv/com/docker/node:16.13.0-alpine.build
+image: registry.soft-fx.lv/org/nodejs/node:18.5.0-alpine3.16-build
 
 variables:
   GIT_SSL_NO_VERIFY: 1
