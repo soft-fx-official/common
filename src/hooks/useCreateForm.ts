@@ -6,6 +6,13 @@ import * as yup from 'yup'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
+type OnSubmit = (data: any) => Promise<any>
+
+interface SubmitCallback {
+  onSuccess: (result: any) => void
+  onError: (error: any, fn: (error: any) => void) => void
+}
+
 const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
   const [isLoad, setIsLoad] = React.useState(false)
   const {
@@ -23,7 +30,7 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
     Object.keys(fields).forEach(field => setError(field, { message: fields[field] }))
   }
 
-  const submit = (onSubmit: any, callbacks: any) =>
+  const submit = (onSubmit: OnSubmit, callbacks?: SubmitCallback) =>
     handleSubmit(data => {
       setIsLoad(true)
       onSubmit(data)
