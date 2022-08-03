@@ -21,6 +21,7 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
     formState: { errors, isValid },
     getValues,
     handleSubmit,
+    ...rest
   } = useForm({
     resolver: yupResolver(yup.object(yupObject).required()),
     mode,
@@ -44,7 +45,7 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
         })
     })()
 
-  return { isLoad, control, errors, submit, isValid, getValues }
+  return { ...rest, isLoad, control, errors, submit, isValid, getValues }
 }
 
 export { useCreateForm }
