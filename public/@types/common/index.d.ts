@@ -5,12 +5,13 @@ import { useHttpErrorHandler } from './useHttpErrorHandler';
 import { useTimer } from './useTimer';
 export { useCreateForm, useDynamicScript, useHttpErrorHandler, useTimer };
 
+import { CriteriaMode } from 'react-hook-form';
 declare type OnSubmit = (data: any) => Promise<any>;
 interface SubmitCallback {
     onSuccess: (result: any) => void;
     onError: (error: any, fn: (error: any) => void) => void;
 }
-declare const useCreateForm: (yupObject: any, mode?: any) => {
+declare const useCreateForm: (yupObject: any, mode?: any, criteriaMode?: CriteriaMode) => {
     isLoad: any;
     control: import("react-hook-form").Control<import("react-hook-form").FieldValues, object>;
     errors: import("react-hook-form").FieldErrorsImpl<import("react-hook-form").DeepRequired<import("react-hook-form").FieldValues>>;
