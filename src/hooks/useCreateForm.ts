@@ -1,7 +1,7 @@
 // NOTE: TS
 
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { CriteriaMode, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -13,7 +13,7 @@ interface SubmitCallback {
   onError: (error: any, fn: (error: any) => void) => void
 }
 
-const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
+const useCreateForm = (yupObject: any, mode: any = 'onChange', criteriaMode?: CriteriaMode) => {
   const [isLoad, setIsLoad] = React.useState(false)
   const {
     control,
@@ -24,11 +24,19 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
     ...rest
   } = useForm({
     resolver: yupResolver(yup.object(yupObject).required()),
+    criteriaMode,
     mode,
   })
 
   const setErrors = (fields: any) => {
-    Object.keys(fields).forEach(field => setError(field, { message: fields[field] }))
+    Object.keys(fields).forEach(field =>
+      setError(
+        field,
+        Array.isArray(fields[field])
+          ? { message: fields[field][0], type: fields[field][1] }
+          : { message: fields[field] },
+      ),
+    )
   }
 
   const submit = (onSubmit: OnSubmit, callbacks?: SubmitCallback) =>
