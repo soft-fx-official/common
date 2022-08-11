@@ -50,6 +50,91 @@ export { useTimer };
 
 };
 
+declare module 'common/inits' {
+import { i18n } from 'i18next';
+import { IBus } from '../tools';
+import { IInitStateR } from './state';
+import { IInitStorageR } from './storage';
+interface IInitEvent {
+    storage: IInitStorageR;
+    i18next: i18n;
+    state: IInitStateR;
+    bus: IBus;
+}
+declare function init({ storage, i18next, state, bus }: IInitEvent, events: ({ storage, i18next, state, bus }: IInitEvent) => void): void;
+export { init as initEvents };
+export type { IInitEvent };
+
+import { IInitEvent, initEvents } from './events';
+import { IInitLocale, initLocale } from './locales';
+import { IInitState, IInitStateR, initState } from './state';
+import { IInitStorage, IInitStorageR, initStorage } from './storage';
+export { initEvents, initLocale, initState, initStorage };
+export type { IInitEvent, IInitLocale, IInitState, IInitStateR, IInitStorage, IInitStorageR };
+
+import { i18n } from 'i18next';
+interface IInit {
+    debug: boolean;
+    fallbackLng: string;
+    supportedLngs: Array<string>;
+    resources: {
+        [name: string]: {
+            translate: string;
+        };
+    };
+}
+declare function init(config: IInit): i18n;
+export { init as initLocale };
+export type { IInit as IInitLocale };
+
+import { IInitStorageR } from './storage';
+interface IMain {
+    isDarkTheme: boolean;
+}
+interface IApp {
+    [name: string]: any;
+}
+interface IInit {
+    main: IMain;
+    app: IApp;
+}
+interface IInitR {
+    main: Main;
+    app: App;
+}
+declare class Main implements IMain {
+    isDarkTheme: boolean;
+    constructor({ isDarkTheme }: {
+        isDarkTheme?: boolean;
+    });
+    toggleDarkTheme: () => void;
+}
+declare class App implements IApp {
+}
+declare function init(storage: IInitStorageR, state: IApp): IInitR;
+export { init as initState };
+export type { IInit as IInitState, IInitR as IInitStateR };
+
+import { IBaseStorage, IStorage } from '../tools/storage';
+interface IInit {
+    main: {
+        storage: IStorage;
+    };
+    app: {
+        name: string;
+        storage: IStorage;
+    };
+}
+interface IInitR {
+    main: IBaseStorage;
+    app: IBaseStorage;
+}
+declare function init(args: IInit): IInitR;
+export { init as initStorage };
+export type { IInit as IInitStorage, IInitR as IInitStorageR };
+
+};
+
 declare module 'common/tools' {
 declare type TBusValues = number | string | Array<TBusValues> | {
     [name: string]: any;

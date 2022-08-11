@@ -3,6 +3,8 @@
   "debug": false,
   "exposes": {
     "./hooks": "./src/hooks",
-    "./tools": "./src/tools"
-  }
+    "./tools": "./src/tools",
+    "./inits": "./src/inits"
+  },
+  "remotes": {}
 }

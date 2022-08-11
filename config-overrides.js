@@ -14,20 +14,16 @@ module.exports = {
         name: config.appName,
         filename: 'remoteEntry.js',
         exposes: config.exposes,
-        remotes: {},
+        remotes: config.remotes,
         shared: {
           ...dependencies,
-          react: {
+          'react': {
             singleton: true,
             requiredVersion: dependencies['react'],
           },
           'react-dom': {
             singleton: true,
             requiredVersion: dependencies['react-dom'],
-          },
-          'react-router-dom': {
-            singleton: true,
-            requiredVersion: dependencies['react-router-dom'],
           },
         },
       }),
