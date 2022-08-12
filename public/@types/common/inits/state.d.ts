@@ -1,6 +1,11 @@
+import { TRouteData } from '../tools';
 import { IInitStorageR } from './storage';
 interface IMain {
     isDarkTheme: boolean;
+    route: string;
+    toggleDarkTheme: () => void;
+    setRoute: (route: string) => void;
+    getRouteData: () => TRouteData;
 }
 interface IApp {
     [name: string]: any;
@@ -15,10 +20,14 @@ interface IInitR {
 }
 declare class Main implements IMain {
     isDarkTheme: boolean;
-    constructor({ isDarkTheme }: {
+    route: string;
+    constructor({ isDarkTheme, route }: {
         isDarkTheme?: boolean;
+        route?: string;
     });
     toggleDarkTheme: () => void;
+    setRoute: (route: string) => void;
+    getRouteData: () => TRouteData;
 }
 declare class App implements IApp {
 }

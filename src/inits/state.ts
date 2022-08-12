@@ -1,9 +1,14 @@
 import { makeAutoObservable } from 'mobx'
 
+import { parseRoute, TRouteData } from '../tools'
 import { IInitStorageR } from './storage'
 
 interface IMain {
   isDarkTheme: boolean
+  route: string
+  toggleDarkTheme: () => void
+  setRoute: (route: string) => void
+  getRouteData: () => TRouteData
 }
 
 interface IApp {
@@ -22,9 +27,11 @@ interface IInitR {
 
 class Main implements IMain {
   isDarkTheme = true
+  route = ''
 
-  constructor({ isDarkTheme = true }) {
+  constructor({ isDarkTheme = true, route = '' }) {
     this.isDarkTheme = isDarkTheme
+    this.route = route
 
     makeAutoObservable(this)
   }
@@ -32,6 +39,12 @@ class Main implements IMain {
   toggleDarkTheme = () => {
     this.isDarkTheme = !this.isDarkTheme
   }
+
+  setRoute = (route: string) => {
+    this.route = route
+  }
+
+  getRouteData = () => parseRoute(this.route)
 }
 
 class App implements IApp {}

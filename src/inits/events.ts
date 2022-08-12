@@ -21,6 +21,9 @@ function init(
     storage.main.set('isDarkTheme', state.main.isDarkTheme)
     storage.app.set('isDarkTheme', state.main.isDarkTheme)
   })
+  bus.on('routing', args => {
+    state.main.setRoute(args?.route)
+  })
   events({ storage, i18next, state, bus })
 }
 

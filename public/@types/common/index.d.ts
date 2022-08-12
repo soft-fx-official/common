@@ -87,9 +87,14 @@ declare function init(config: IInit): i18n;
 export { init as initLocale };
 export type { IInit as IInitLocale };
 
+import { TRouteData } from '../tools';
 import { IInitStorageR } from './storage';
 interface IMain {
     isDarkTheme: boolean;
+    route: string;
+    toggleDarkTheme: () => void;
+    setRoute: (route: string) => void;
+    getRouteData: () => TRouteData;
 }
 interface IApp {
     [name: string]: any;
@@ -104,10 +109,14 @@ interface IInitR {
 }
 declare class Main implements IMain {
     isDarkTheme: boolean;
-    constructor({ isDarkTheme }: {
+    route: string;
+    constructor({ isDarkTheme, route }: {
         isDarkTheme?: boolean;
+        route?: string;
     });
     toggleDarkTheme: () => void;
+    setRoute: (route: string) => void;
+    getRouteData: () => TRouteData;
 }
 declare class App implements IApp {
 }
@@ -174,12 +183,28 @@ export type { IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetDa
 
 import { Bus, IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues } from './bus';
 import { loadDynamicComponent } from './loadDynamicComponent';
+import { IUpdateRoute, parseRoute, TRouteData, updateRoute } from './route';
 import { IBaseStorage, IStorage, Storage, TStorageValue } from './storage';
-export { Bus, loadDynamicComponent, Storage };
-export type { IBaseStorage, IBus, IStorage, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues, TStorageValue, };
+export { Bus, loadDynamicComponent, parseRoute, Storage, updateRoute };
+export type { IBaseStorage, IBus, IStorage, IUpdateRoute, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues, TRouteData, TStorageValue, };
 
 declare function loadDynamicComponent(scope: string, module: string): () => Promise<any>;
 export { loadDynamicComponent };
+
+declare type TRouteData = {
+    [name: string]: {
+        [name: string]: string[];
+    };
+};
+declare const parseRoute: (route: string) => TRouteData;
+interface IUpdateRoute {
+    app: string;
+    key: string;
+    values: string[];
+}
+declare const updateRoute: ({ app, key, values }: IUpdateRoute) => void;
+export { parseRoute, updateRoute };
+export type { IUpdateRoute, TRouteData };
 
 declare type TStorageValue = string | number | boolean | null | Array<TStorageValue> | {
     [key: string]: TStorageValue;
