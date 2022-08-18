@@ -52,6 +52,7 @@ class App implements IApp {}
 function init(storage: IInitStorageR, state: IApp): IInitR {
   const main = new Main({
     isDarkTheme: !!storage.main.get('isDarkTheme') || !!storage.app.get('isDarkTheme'),
+    route: window.location.hash,
   })
 
   return {
