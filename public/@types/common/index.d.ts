@@ -183,10 +183,10 @@ export type { IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetDa
 
 import { Bus, IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues } from './bus';
 import { loadDynamicComponent } from './loadDynamicComponent';
-import { IUpdateRoute, parseRoute, TRouteData, updateRoute } from './route';
+import { IRemoveRoute, IUpdateRoute, parseRoute, removeRoute, TRouteData, updateRoute } from './route';
 import { IBaseStorage, IStorage, Storage, TStorageValue } from './storage';
-export { Bus, loadDynamicComponent, parseRoute, Storage, updateRoute };
-export type { IBaseStorage, IBus, IStorage, IUpdateRoute, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues, TRouteData, TStorageValue, };
+export { Bus, loadDynamicComponent, parseRoute, removeRoute, Storage, updateRoute };
+export type { IBaseStorage, IBus, IRemoveRoute, IStorage, IUpdateRoute, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues, TRouteData, TStorageValue, };
 
 declare function loadDynamicComponent(scope: string, module: string): () => Promise<any>;
 export { loadDynamicComponent };
@@ -203,8 +203,12 @@ interface IUpdateRoute {
     values: string[];
 }
 declare const updateRoute: ({ app, key, values }: IUpdateRoute) => void;
-export { parseRoute, updateRoute };
-export type { IUpdateRoute, TRouteData };
+interface IRemoveRoute {
+    app: string;
+}
+declare const removeRoute: ({ app }: IRemoveRoute) => void;
+export { parseRoute, removeRoute, updateRoute };
+export type { IRemoveRoute, IUpdateRoute, TRouteData };
 
 declare type TStorageValue = string | number | boolean | null | Array<TStorageValue> | {
     [key: string]: TStorageValue;

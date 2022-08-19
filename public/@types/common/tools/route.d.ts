@@ -10,5 +10,9 @@ interface IUpdateRoute {
     values: string[];
 }
 declare const updateRoute: ({ app, key, values }: IUpdateRoute) => void;
-export { parseRoute, updateRoute };
-export type { IUpdateRoute, TRouteData };
+interface IRemoveRoute {
+    app: string;
+}
+declare const removeRoute: ({ app }: IRemoveRoute) => void;
+export { parseRoute, removeRoute, updateRoute };
+export type { IRemoveRoute, IUpdateRoute, TRouteData };

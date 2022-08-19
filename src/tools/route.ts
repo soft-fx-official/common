@@ -1,4 +1,18 @@
+// NOTE: Class
+
 type TRouteData = { [name: string]: { [name: string]: string[] } }
+
+const buildRoute = (apps: TRouteData) => {
+  let data: string = ''
+  Object.keys(apps).forEach(app => {
+    Object.keys(apps[app]).forEach(key => {
+      apps[app][key].forEach(value => {
+        data = `${app}:${key}:${value};${data}`
+      })
+    })
+  })
+  return data
+}
 
 const parseRoute = (route: string): TRouteData => {
   const data: TRouteData = {}
@@ -30,17 +44,18 @@ const updateRoute = ({ app, key, values }: IUpdateRoute): void => {
   if (!apps[app]) apps[app] = {}
   apps[app][key] = values
 
-  let data: string = ''
-  Object.keys(apps).forEach(app => {
-    Object.keys(apps[app]).forEach(key => {
-      apps[app][key].forEach(value => {
-        data = `${app}:${key}:${value};${data}`
-      })
-    })
-  })
-
-  window.location.hash = data
+  window.location.hash = buildRoute(apps)
 }
 
-export { parseRoute, updateRoute }
-export type { IUpdateRoute, TRouteData }
+interface IRemoveRoute {
+  app: string
+}
+
+const removeRoute = ({ app }: IRemoveRoute) => {
+  const apps: TRouteData = parseRoute(window.location.hash)
+  delete apps[app]
+  window.location.hash = buildRoute(apps)
+}
+
+export { parseRoute, removeRoute, updateRoute }
+export type { IRemoveRoute, IUpdateRoute, TRouteData }
