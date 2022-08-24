@@ -4,13 +4,17 @@ type TRouteData = { [name: string]: { [name: string]: string[] } }
 
 const buildRoute = (apps: TRouteData) => {
   let data: string = ''
-  Object.keys(apps).forEach(app => {
-    Object.keys(apps[app]).forEach(key => {
-      apps[app][key].forEach(value => {
-        data = `${app}:${key}:${value};${data}`
-      })
+  Object.keys(apps)
+    .sort()
+    .forEach(app => {
+      Object.keys(apps[app])
+        .sort()
+        .forEach(key => {
+          apps[app][key].sort().forEach(value => {
+            data = `${app}:${key}:${value};${data}`
+          })
+        })
     })
-  })
   return data
 }
 
