@@ -202,7 +202,7 @@ interface IUpdateRoute {
     key: string;
     values: string[];
 }
-declare const updateRoute: ({ app, key, values }: IUpdateRoute) => void;
+declare const updateRoute: ({ app, key, values }: IUpdateRoute, isReset?: boolean) => void;
 interface IRemoveRoute {
     app: string;
 }

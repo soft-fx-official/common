@@ -43,12 +43,19 @@ interface IUpdateRoute {
   values: string[]
 }
 
-const updateRoute = ({ app, key, values }: IUpdateRoute): void => {
-  const apps: TRouteData = parseRoute(window.location.hash)
-  if (!apps[app]) apps[app] = {}
-  apps[app][key] = values
+const updateRoute = ({ app, key, values }: IUpdateRoute, isReset: boolean = false): void => {
+  let route: TRouteData
 
-  window.location.hash = buildRoute(apps)
+  if (isReset) {
+    route = { [app]: { [key]: values } }
+  } else {
+    const apps: TRouteData = parseRoute(window.location.hash)
+    if (!apps[app]) apps[app] = {}
+    apps[app][key] = values
+    route = apps
+  }
+
+  window.location.hash = buildRoute(route)
 }
 
 interface IRemoveRoute {
