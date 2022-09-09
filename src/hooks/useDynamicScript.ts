@@ -22,12 +22,12 @@ const useDynamicScript = (url: string): IUseDynamicScriptR => {
     setFailed(false)
 
     element.onload = () => {
-      console.info(`[INFO][DYNAMIC SCRIPT][LOAD]: ${url}`)
+      console.info(`[DYNAMIC SCRIPT][LOAD]: ${url}`)
       setReady(true)
     }
 
     element.onerror = () => {
-      console.info(`[ERROR][DYNAMIC SCRIPT]: ${url}`)
+      console.info(`[DYNAMIC SCRIPT][ERROR]: ${url}`)
       setReady(false)
       setFailed(true)
     }
@@ -35,7 +35,7 @@ const useDynamicScript = (url: string): IUseDynamicScriptR => {
     document.head.appendChild(element)
 
     return () => {
-      console.info(`[INFO][DYNAMIC SCRIPT][REMOVED]: ${url}`)
+      console.info(`[DYNAMIC SCRIPT][REMOVED]: ${url}`)
       document.head.removeChild(element)
     }
   }, [url])

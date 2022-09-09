@@ -21,7 +21,7 @@ const useHttpErrorHandler = ({
               if (!fieldName) return acc
               return {
                 ...acc,
-                [fieldName]: cError.message,
+                [fieldName]: [cError.message, cError[errorKey]],
               }
             },
             {},

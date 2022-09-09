@@ -1,12 +1,19 @@
 // NOTE: TS
 
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { CriteriaMode, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 
-const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
+type OnSubmit = (data: any) => Promise<any>
+
+interface SubmitCallback {
+  onSuccess: (result: any) => void
+  onError: (error: any, fn: (error: any) => void) => void
+}
+
+const useCreateForm = (yupObject: any, mode: any = 'onChange', criteriaMode?: CriteriaMode) => {
   const [isLoad, setIsLoad] = React.useState(false)
   const {
     control,
@@ -14,16 +21,25 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
     formState: { errors, isValid },
     getValues,
     handleSubmit,
+    ...rest
   } = useForm({
     resolver: yupResolver(yup.object(yupObject).required()),
+    criteriaMode,
     mode,
   })
 
   const setErrors = (fields: any) => {
-    Object.keys(fields).forEach(field => setError(field, { message: fields[field] }))
+    Object.keys(fields).forEach(field =>
+      setError(
+        field,
+        Array.isArray(fields[field])
+          ? { message: fields[field][0], type: fields[field][1] }
+          : { message: fields[field] },
+      ),
+    )
   }
 
-  const submit = (onSubmit: any, callbacks: any) =>
+  const submit = (onSubmit: OnSubmit, callbacks?: SubmitCallback) =>
     handleSubmit(data => {
       setIsLoad(true)
       onSubmit(data)
@@ -37,7 +53,7 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange') => {
         })
     })()
 
-  return { isLoad, control, errors, submit, isValid, getValues }
+  return { ...rest, isLoad, control, errors, submit, isValid, getValues }
 }
 
 export { useCreateForm }
