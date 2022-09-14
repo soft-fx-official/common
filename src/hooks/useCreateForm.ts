@@ -17,7 +17,9 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange', criteriaMode?: Cr
   const [isLoad, setIsLoad] = React.useState(false)
   const {
     control,
+    setValue,
     setError,
+    clearErrors,
     formState: { errors, isValid },
     getValues,
     handleSubmit,
@@ -53,7 +55,7 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange', criteriaMode?: Cr
         })
     })()
 
-  return { ...rest, isLoad, control, errors, submit, isValid, getValues }
+  return { ...rest, isLoad, control, errors, submit, isValid, getValues, setValue, clearErrors }
 }
 
 export { useCreateForm }
