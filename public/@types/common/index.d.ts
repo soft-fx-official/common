@@ -18,10 +18,10 @@ declare const useCreateForm: (yupObject: any, mode?: any, criteriaMode?: Criteri
     submit: (onSubmit: OnSubmit, callbacks?: SubmitCallback) => Promise<void>;
     isValid: boolean;
     getValues: import("react-hook-form").UseFormGetValues<import("react-hook-form").FieldValues>;
+    setValue: import("react-hook-form").UseFormSetValue<import("react-hook-form").FieldValues>;
+    clearErrors: import("react-hook-form").UseFormClearErrors<import("react-hook-form").FieldValues>;
     watch: import("react-hook-form").UseFormWatch<import("react-hook-form").FieldValues>;
     getFieldState: import("react-hook-form").UseFormGetFieldState<import("react-hook-form").FieldValues>;
-    clearErrors: import("react-hook-form").UseFormClearErrors<import("react-hook-form").FieldValues>;
-    setValue: import("react-hook-form").UseFormSetValue<import("react-hook-form").FieldValues>;
     trigger: import("react-hook-form").UseFormTrigger<import("react-hook-form").FieldValues>;
     resetField: import("react-hook-form").UseFormResetField<import("react-hook-form").FieldValues>;
     reset: import("react-hook-form").UseFormReset<import("react-hook-form").FieldValues>;
