@@ -8,7 +8,7 @@ export { useCreateForm, useDynamicScript, useHttpErrorHandler, useTimer };
 import { CriteriaMode } from 'react-hook-form';
 declare type OnSubmit = (data: any) => Promise<any>;
 interface SubmitCallback {
-    onSuccess: (result: any) => void;
+    onSuccess: (result: any, data: any) => void;
     onError: (error: any, fn: (error: any) => void) => void;
 }
 declare const useCreateForm: (yupObject: any, mode?: any, criteriaMode?: CriteriaMode) => {

@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 type OnSubmit = (data: any) => Promise<any>
 
 interface SubmitCallback {
-  onSuccess: (result: any) => void
+  onSuccess: (result: any, data: any) => void
   onError: (error: any, fn: (error: any) => void) => void
 }
 
@@ -45,7 +45,7 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange', criteriaMode?: Cr
       onSubmit(data)
         .then((result: any) => {
           setIsLoad(false)
-          if (callbacks?.onSuccess) callbacks.onSuccess(result)
+          if (callbacks?.onSuccess) callbacks.onSuccess(result, data)
         })
         .catch((error: any) => {
           setIsLoad(false)
