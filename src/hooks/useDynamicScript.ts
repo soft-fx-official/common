@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface IUseDynamicScriptR {
   ready: boolean
@@ -9,7 +9,7 @@ const useDynamicScript = (url: string): IUseDynamicScriptR => {
   const [ready, setReady] = React.useState(false)
   const [failed, setFailed] = React.useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!url) return
 
     const element = document.createElement('script')
@@ -28,7 +28,6 @@ const useDynamicScript = (url: string): IUseDynamicScriptR => {
 
     element.onerror = () => {
       console.info(`[DYNAMIC SCRIPT][ERROR]: ${url}`)
-      setReady(false)
       setFailed(true)
     }
 
