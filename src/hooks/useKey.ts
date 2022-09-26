@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const useKey = (key: string, cb: (event: EventListener) => void) => {
+const useKey = (key: string, cb: (event: KeyboardEvent) => void) => {
   const cbRef = useRef(cb)
 
   useEffect(() => {
@@ -8,8 +8,7 @@ const useKey = (key: string, cb: (event: EventListener) => void) => {
   })
 
   useEffect(() => {
-    // @ts-ignore
-    const handle = event => {
+    const handle = (event: KeyboardEvent) => {
       if (event.code === key) {
         cbRef.current(event)
       }
