@@ -2,8 +2,9 @@ declare module 'common/hooks' {
 import { useCreateForm } from './useCreateForm';
 import { useDynamicScript } from './useDynamicScript';
 import { useHttpErrorHandler } from './useHttpErrorHandler';
+import { useKey } from './useKey';
 import { useTimer } from './useTimer';
-export { useCreateForm, useDynamicScript, useHttpErrorHandler, useTimer };
+export { useCreateForm, useDynamicScript, useHttpErrorHandler, useKey, useTimer };
 
 import { CriteriaMode } from 'react-hook-form';
 declare type OnSubmit = (data: any) => Promise<any>;
@@ -44,6 +45,9 @@ declare type UseHttpErrorHandlerProps = {
 };
 declare const useHttpErrorHandler: ({ errorKey, modelFieldDictionary, }: UseHttpErrorHandlerProps) => (error: any, setError: (errors: Record<string, string>) => void) => void;
 export { useHttpErrorHandler };
+
+declare const useKey: (key: string, cb: (event: KeyboardEvent) => void) => void;
+export { useKey };
 
 declare const useTimer: (start: number, onStop: () => void, tactMs?: number) => number;
 export { useTimer };
@@ -167,6 +171,7 @@ interface IBus {
     save: (name: string, getData: TBusGetData) => void;
     get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null;
     getAll: (name: string) => Array<TBusValues>;
+    delete: (target: string | ((key: string) => boolean)) => void;
 }
 declare class Bus implements IBus {
     events: TBusEvents;
@@ -177,6 +182,7 @@ declare class Bus implements IBus {
     save: (name: string, getData: TBusGetData) => void;
     get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null;
     getAll: (name: string) => Array<TBusValues>;
+    delete: (target: string | ((key: string) => boolean)) => void;
 }
 export { Bus };
 export type { IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues };

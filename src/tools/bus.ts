@@ -18,6 +18,7 @@ interface IBus {
   save: (name: string, getData: TBusGetData) => void
   get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null
   getAll: (name: string) => Array<TBusValues>
+  delete: (target: string | ((key: string) => boolean)) => void
 }
 
 // NOTE: Folded tires for consecutive calls?
@@ -59,6 +60,14 @@ class Bus implements IBus {
     if (!(name in this.data)) return []
     console.info(`[BUS][GET_ALL]: ${name}`)
     return Array.from(this.data[name], getData => getData())
+  }
+
+  delete = (target: string | ((key: string) => boolean)) => {
+    const targetFn = typeof target === 'string' ? (key: string) => key === target : target
+    console.info(`[BUS][DELETE]: ${typeof target === 'string' ? target : ''}`)
+    Object.keys(this.data)
+      .filter(key => targetFn(key))
+      .forEach(key => delete this.data[key])
   }
 }
 
