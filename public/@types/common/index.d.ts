@@ -2,8 +2,9 @@ declare module 'common/hooks' {
 import { useCreateForm } from './useCreateForm';
 import { useDynamicScript } from './useDynamicScript';
 import { useHttpErrorHandler } from './useHttpErrorHandler';
+import { useKey } from './useKey';
 import { useTimer } from './useTimer';
-export { useCreateForm, useDynamicScript, useHttpErrorHandler, useTimer };
+export { useCreateForm, useDynamicScript, useHttpErrorHandler, useKey, useTimer };
 
 import { CriteriaMode } from 'react-hook-form';
 declare type OnSubmit = (data: any) => Promise<any>;
@@ -44,6 +45,9 @@ declare type UseHttpErrorHandlerProps = {
 };
 declare const useHttpErrorHandler: ({ errorKey, modelFieldDictionary, }: UseHttpErrorHandlerProps) => (error: any, setError: (errors: Record<string, string>) => void) => void;
 export { useHttpErrorHandler };
+
+declare const useKey: (key: string, cb: (event: KeyboardEvent) => void) => void;
+export { useKey };
 
 declare const useTimer: (start: number, onStop: () => void, tactMs?: number) => number;
 export { useTimer };
