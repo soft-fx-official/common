@@ -171,6 +171,7 @@ interface IBus {
     save: (name: string, getData: TBusGetData) => void;
     get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null;
     getAll: (name: string) => Array<TBusValues>;
+    delete: (target: string | ((key: string) => boolean)) => void;
 }
 declare class Bus implements IBus {
     events: TBusEvents;
@@ -181,6 +182,7 @@ declare class Bus implements IBus {
     save: (name: string, getData: TBusGetData) => void;
     get: (name: string, dataDefault?: TBusValues | null) => TBusValues | null;
     getAll: (name: string) => Array<TBusValues>;
+    delete: (target: string | ((key: string) => boolean)) => void;
 }
 export { Bus };
 export type { IBus, TBusArgs, TBusData, TBusEventCallback, TBusEvents, TBusGetData, TBusValues };
