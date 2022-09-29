@@ -18,6 +18,7 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange', criteriaMode?: Cr
   const {
     control,
     setValue,
+    resetField,
     setError,
     clearErrors,
     formState: { errors, isValid },
@@ -55,7 +56,18 @@ const useCreateForm = (yupObject: any, mode: any = 'onChange', criteriaMode?: Cr
         })
     })()
 
-  return { ...rest, isLoad, control, errors, submit, isValid, getValues, setValue, clearErrors }
+  return {
+    ...rest,
+    isLoad,
+    control,
+    errors,
+    submit,
+    isValid,
+    getValues,
+    setValue,
+    resetField,
+    clearErrors,
+  }
 }
 
 export { useCreateForm }
