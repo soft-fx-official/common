@@ -1,0 +1,12 @@
+/.yarn/releases/** binary
+/.yarn/plugins/** binary
+
+* eol=lf
+*.webp -text
+*.jpg -text
+*.jpeg -text
+*.png -text
+*.ico -text
+*.gif -text
+*.mp3 -text
+*.mpeg -text
