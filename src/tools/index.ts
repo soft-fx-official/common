@@ -10,6 +10,8 @@ import {
 } from './bus'
 import { loadDynamicComponent } from './loadDynamicComponent'
 import {
+  bulkUpdateRoute,
+  IBulkUpdateRoute,
   IRemoveRoute,
   IUpdateRoute,
   parseRoute,
@@ -19,9 +21,10 @@ import {
 } from './route'
 import { IBaseStorage, IStorage, Storage, TStorageValue } from './storage'
 
-export { Bus, loadDynamicComponent, parseRoute, removeRoute, Storage, updateRoute }
+export { bulkUpdateRoute, Bus, loadDynamicComponent, parseRoute, removeRoute, Storage, updateRoute }
 export type {
   IBaseStorage,
+  IBulkUpdateRoute,
   IBus,
   IRemoveRoute,
   IStorage,
