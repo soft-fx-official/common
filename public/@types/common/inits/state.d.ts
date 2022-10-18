@@ -34,6 +34,6 @@ declare class Main implements IMain {
 }
 declare class App implements IApp {
 }
-declare function init(storage: IInitStorageR, state: IApp): IInitR;
+declare function init(storage: IInitStorageR, state: IApp, isPrefersDarkMode?: boolean): IInitR;
 export { init as initState };
 export type { IInit as IInitState, IInitR as IInitStateR };
