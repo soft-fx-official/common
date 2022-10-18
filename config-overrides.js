@@ -14,7 +14,7 @@ module.exports = {
         name: config.appName,
         filename: 'remoteEntry.js',
         exposes: config.exposes,
-        remotes: config.remotes,
+        remotes: {},
         shared: {
           ...dependencies,
           'react': {
