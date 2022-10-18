@@ -1,12 +1,12 @@
-const { ModuleFederationPlugin } = require('webpack').container
-const W5MFTypesPlugin = require('w5mf-types')
-const { dependencies } = require('./package.json')
-const config = require('./src/config')
+const { ModuleFederationPlugin } = require('webpack').container;
+const W5MFTypesPlugin = require('w5mf-types');
+const { dependencies } = require('./package.json');
+const config = require('./src/config');
 
 module.exports = {
   webpack: function (webpackConfig, env) {
-    webpackConfig.output.publicPath = 'auto'
-    webpackConfig.output.uniqueName = config.appName
+    webpackConfig.output.publicPath = 'auto';
+    webpackConfig.output.uniqueName = config.appName;
 
     webpackConfig.plugins = [
       ...webpackConfig.plugins,
@@ -28,8 +28,8 @@ module.exports = {
         },
       }),
       new W5MFTypesPlugin(),
-    ]
+    ];
 
-    return webpackConfig
+    return webpackConfig;
   },
 }
