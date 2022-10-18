@@ -5,13 +5,13 @@
   "scripts": {
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
-    "eslint": "eslint \"src/**/*.{js,ts,jsx,tsx}\"",
-    "eslint:fix": "eslint --fix \"src/**/*.{js,ts,jsx,tsx}\"",
+    "eslint": "eslint \"src/**/*.{jsx,ts,tsx}\"",
+    "eslint:fix": "eslint --fix \"src/**/*.{jsx,ts,tsx}\"",
     "lint": "npm run eslint",
     "lint:fix": "npm run eslint:fix && npm run prettier",
     "lintstaged": "lint-staged",
     "prepare": "husky install",
-    "prettier": "prettier --write \"src/**/*.{js,ts,jsx,tsx,json,md,yml,yaml}\"",
+    "prettier": "prettier --write \"src/**/*.{jsx,ts,tsx,json,md,yml,yaml}\"",
     "start": "react-app-rewired start",
     "test": "react-app-rewired test"
   },
