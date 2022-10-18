@@ -1,3 +1,79 @@
+declare module 'common/components/ErrorBoundary' {
+import React from 'react';
+interface IErrorBoundary {
+    children: React.ReactElement;
+    onError: (error: any) => void;
+}
+declare class ErrorBoundary extends React.Component<IErrorBoundary> {
+    constructor(props: IErrorBoundary);
+    static getDerivedStateFromError(): {
+        hasError: boolean;
+    };
+    componentDidCatch(error: any, errorInfo: any): void;
+    render(): any;
+}
+export { ErrorBoundary };
+export type { IErrorBoundary };
+
+};
+
+declare module 'common/components' {
+import React from 'react';
+interface IErrorBoundary {
+    children: React.ReactElement;
+    onError: (error: any) => void;
+}
+declare class ErrorBoundary extends React.Component<IErrorBoundary> {
+    constructor(props: IErrorBoundary);
+    static getDerivedStateFromError(): {
+        hasError: boolean;
+    };
+    componentDidCatch(error: any, errorInfo: any): void;
+    render(): any;
+}
+export { ErrorBoundary };
+export type { IErrorBoundary };
+
+export type { IModuleLoader } from './ModuleLoader';
+export { ModuleLoader } from './ModuleLoader';
+export type { IErrorBoundary } from './ErrorBoundary';
+export { ErrorBoundary } from './ErrorBoundary';
+
+import React from 'react';
+import { IBus } from '../../tools';
+interface IModuleLoader {
+    url: string;
+    scope: string;
+    module: string;
+    bus: IBus | null;
+    onError: (error: any) => void;
+    onLoad: () => void;
+    onDone: () => void;
+}
+declare const ModuleLoader: React.FC<IModuleLoader>;
+export { ModuleLoader };
+export type { IModuleLoader };
+
+};
+
+declare module 'common/components/ModuleLoader' {
+import React from 'react';
+import { IBus } from '../../tools';
+interface IModuleLoader {
+    url: string;
+    scope: string;
+    module: string;
+    bus: IBus | null;
+    onError: (error: any) => void;
+    onLoad: () => void;
+    onDone: () => void;
+}
+declare const ModuleLoader: React.FC<IModuleLoader>;
+export { ModuleLoader };
+export type { IModuleLoader };
+
+};
+
 declare module 'common/hooks' {
 import { useCreateForm } from './useCreateForm';
 import { useDynamicScript } from './useDynamicScript';
