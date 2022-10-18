@@ -1,7 +1,7 @@
 import React, { lazy, memo } from 'react'
+
 import { useDynamicScript } from '../../hooks'
 import { IBus, loadDynamicComponent } from '../../tools'
-
 import { ErrorBoundary } from '../ErrorBoundary'
 
 interface IModuleLoader {
