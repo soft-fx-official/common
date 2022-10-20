@@ -17,7 +17,7 @@ interface IInit {
 }
 interface IInitR {
     main: Main;
-    app: App;
+    app: IApp;
 }
 declare class Main implements IMain {
     isDarkTheme: boolean;
@@ -31,8 +31,6 @@ declare class Main implements IMain {
     setRoute: (route: string) => void;
     setIsLoader: (isLoader: boolean) => boolean;
     getRouteData: () => TRouteData;
-}
-declare class App implements IApp {
 }
 declare function init(storage: IInitStorageR, state: IApp): IInitR;
 export { init as initState };

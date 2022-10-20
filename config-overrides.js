@@ -1,12 +1,13 @@
-const { ModuleFederationPlugin } = require('webpack').container
-const W5MFTypesPlugin = require('w5mf-types')
-const { dependencies } = require('./package.json')
-const config = require('./src/config')
+const path = require('path');
+const { ModuleFederationPlugin } = require('webpack').container;
+const W5MFTypesGeneratePlugin = require('w5mf-types-generate');
+const { dependencies } = require('./package.json');
+const config = require('./src/config');
 
 module.exports = {
   webpack: function (webpackConfig, env) {
-    webpackConfig.output.publicPath = 'auto'
-    webpackConfig.output.uniqueName = config.appName
+    webpackConfig.output.publicPath = 'auto';
+    webpackConfig.output.uniqueName = config.appName;
 
     webpackConfig.plugins = [
       ...webpackConfig.plugins,
@@ -14,7 +15,7 @@ module.exports = {
         name: config.appName,
         filename: 'remoteEntry.js',
         exposes: config.exposes,
-        remotes: config.remotes,
+        remotes: {},
         shared: {
           ...dependencies,
           'react': {
@@ -27,9 +28,25 @@ module.exports = {
           },
         },
       }),
-      new W5MFTypesPlugin(),
-    ]
+      new W5MFTypesGeneratePlugin(),
+    ];
 
-    return webpackConfig
+    webpackConfig.module.rules = [
+      ...webpackConfig.module.rules,
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'dts-loader',
+          options: {
+            name: config.appName,
+            exposes: config.exposes,
+            typesOutputDir: path.resolve(__dirname, './w5mf-types'),
+          },
+        }],
+      },
+    ];
+
+    return webpackConfig;
   },
 }
