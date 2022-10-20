@@ -7,7 +7,7 @@ interface IInit {
   fallbackLng: string
   supportedLngs: Array<string>
   resources: {
-    [name: string]: { translate: string }
+    [name: string]: { translation: any }
   }
 }
 
