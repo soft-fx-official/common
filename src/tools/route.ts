@@ -58,6 +58,24 @@ const updateRoute = ({ app, key, values }: IUpdateRoute, isReset: boolean = fals
   window.location.hash = buildRoute(route)
 }
 
+interface IBulkUpdateRoute {
+  app: string
+  params: Record<string, string[]>
+}
+
+const bulkUpdateRoute = ({ app, params }: IBulkUpdateRoute, isReset: boolean = false): void => {
+  let route: TRouteData
+  if (isReset) {
+    route = { [app]: params }
+  } else {
+    const apps: TRouteData = parseRoute(window.location.hash)
+    apps[app] = { ...(apps[app] || {}), ...params }
+    route = apps
+  }
+
+  window.location.hash = buildRoute(route)
+}
+
 interface IRemoveRoute {
   app: string
 }
@@ -68,5 +86,5 @@ const removeRoute = ({ app }: IRemoveRoute) => {
   window.location.hash = buildRoute(apps)
 }
 
-export { parseRoute, removeRoute, updateRoute }
-export type { IRemoveRoute, IUpdateRoute, TRouteData }
+export { bulkUpdateRoute, parseRoute, removeRoute, updateRoute }
+export type { IBulkUpdateRoute, IRemoveRoute, IUpdateRoute, TRouteData }

@@ -5,7 +5,7 @@ interface IInit {
     supportedLngs: Array<string>;
     resources: {
         [name: string]: {
-            translate: string;
+            translation: any;
         };
     };
 }
