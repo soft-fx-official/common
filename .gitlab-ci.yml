@@ -3,25 +3,25 @@ variables:
 
 stages:
 - "build.source"
-- "build.doc"
 
 build:
   image: registry.soft-fx.lv/org/nodejs/node:18.5.0-alpine3.16-build
   stage: "build.source"
   script:
   - npm install
-  - REACT_APP_PATH_ROOT=${CI_COMMIT_REF_NAME}/ REACT_APP_BRANCH=${CI_COMMIT_REF_NAME} npm run build
-  - s3cmd --host=${AWS_S3_HOST} --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}
-    --signature-v2 --progress --no-preserve --recursive --force --acl-public --no-check-certificate --delete-removed --no-mime-magic --guess-mime-type
-    sync ./build/
-    s3://${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/
-
-docs:
-  image: registry.soft-fx.lv/org/mkdocs:v1.3.1-build
-  stage: "build.doc"
-  script:
-  - mkdocs build --clean
-  - s3cmd --host=${AWS_S3_HOST} --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}
-    --signature-v2 --progress --no-preserve --recursive --force --acl-public --no-check-certificate --delete-removed --no-mime-magic --guess-mime-type
-    sync ./build/docs/
-    s3://${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/docs/
+  - npm run lint:fix
+  - npm run build
+  - s3cmd
+    --host=${AWS_S3_HOST}
+    --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}
+    --signature-v2
+    --progress
+    --no-preserve
+    --recursive
+    --force
+    --acl-public
+    --no-check-certificate
+    --delete-removed
+    --no-mime-magic
+    --guess-mime-type
+    sync ./build/ s3://${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/
