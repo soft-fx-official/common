@@ -1,5 +1,6 @@
+const path = require('path');
 const { ModuleFederationPlugin } = require('webpack').container;
-const W5MFTypesPlugin = require('w5mf-types');
+const W5MFTypesGeneratePlugin = require('w5mf-types-generate');
 const { dependencies } = require('./package.json');
 const config = require('./src/config');
 
@@ -27,7 +28,23 @@ module.exports = {
           },
         },
       }),
-      new W5MFTypesPlugin(),
+      new W5MFTypesGeneratePlugin(),
+    ];
+
+    webpackConfig.module.rules = [
+      ...webpackConfig.module.rules,
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'dts-loader',
+          options: {
+            name: config.appName,
+            exposes: config.exposes,
+            typesOutputDir: path.resolve(__dirname, './w5mf-types'),
+          },
+        }],
+      },
     ];
 
     return webpackConfig;

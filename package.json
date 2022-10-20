@@ -36,6 +36,7 @@
     "@types/node": "16.11.39",
     "@types/react": "18.0.12",
     "@types/react-dom": "18.0.5",
+    "dts-loader": "0.1.8",
     "i18next": "21.8.9",
     "i18next-browser-languagedetector": "6.1.4",
     "lodash": "4.17.21",
@@ -48,8 +49,8 @@
     "react-i18next": "11.17.1",
     "react-scripts": "5.0.1",
     "typescript": "4.7.3",
-    "w5mf-types": "0.2.x",
-    "yup": "0.32.11"
+    "yup": "0.32.11",
+    "w5mf-types-generate": "0.1.x"
   },
   "devDependencies": {
     "@types/lodash": "4.14.182",
