@@ -23,7 +23,7 @@ interface IInit {
 
 interface IInitR {
   main: Main
-  app: App
+  app: IApp
 }
 
 class Main implements IMain {

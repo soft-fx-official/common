@@ -9,7 +9,8 @@ build:
   stage: "build.source"
   script:
   - npm install
-  - REACT_APP_PATH_ROOT=${CI_COMMIT_REF_NAME}/ REACT_APP_BRANCH=${CI_COMMIT_REF_NAME} npm run build
+  - npm run lint:fix
+  - npm run build
   - s3cmd
     --host=${AWS_S3_HOST}
     --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}

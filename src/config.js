@@ -4,5 +4,6 @@ module.exports = {
     './hooks': './src/hooks',
     './tools': './src/tools',
     './inits': './src/inits',
+    './components': './src/components',
   },
 }
