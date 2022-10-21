@@ -32,6 +32,6 @@ declare class Main implements IMain {
     setIsLoader: (isLoader: boolean) => boolean;
     getRouteData: () => TRouteData;
 }
-declare function init(storage: IInitStorageR, state: IApp): IInitR;
+declare function init(storage: IInitStorageR, state: IApp, isPrefersDarkMode?: boolean): IInitR;
 export { init as initState };
 export type { IInit as IInitState, IInitR as IInitStateR };
