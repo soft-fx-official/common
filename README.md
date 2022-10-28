@@ -31,6 +31,10 @@
     npm run lint:fix
     npm run lintstaged
 
+## Update API
+
+    npm run update:api:main
+
 ## Commands
 
 #### Sort package.json :

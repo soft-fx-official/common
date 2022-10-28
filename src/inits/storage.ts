@@ -1,29 +1,29 @@
 import { IBaseStorage, IStorage, Storage } from '../tools/storage'
 
-interface IInit {
-  main: {
-    storage: IStorage
-  }
-  app: {
-    name: string
-    storage: IStorage
-  }
-}
-
 interface IInitR {
-  main: IBaseStorage
-  app: IBaseStorage
+  local: {
+    main: IBaseStorage
+    app: IBaseStorage
+  }
+  session: {
+    main: IBaseStorage
+    app: IBaseStorage
+  }
 }
 
-function init(args: IInit): IInitR {
-  const main = new Storage('main', args.main.storage)
-  const app = new Storage(args.app.name, args.app.storage)
-
-  return {
-    main,
-    app,
+function init(name: string): IInitR {
+  const local = {
+    main: new Storage('main', window.localStorage),
+    app: new Storage(name, window.localStorage),
   }
+
+  const session = {
+    main: new Storage('main', window.sessionStorage),
+    app: new Storage(name, window.sessionStorage),
+  }
+
+  return { local, session }
 }
 
 export { init as initStorage }
-export type { IInit as IInitStorage, IInitR as IInitStorageR }
+export type { IInitR as IInitStorageR }

@@ -1,17 +1,14 @@
-import { IBaseStorage, IStorage } from '../tools/storage';
-interface IInit {
-    main: {
-        storage: IStorage;
-    };
-    app: {
-        name: string;
-        storage: IStorage;
-    };
-}
+import { IBaseStorage } from '../tools/storage';
 interface IInitR {
-    main: IBaseStorage;
-    app: IBaseStorage;
+    local: {
+        main: IBaseStorage;
+        app: IBaseStorage;
+    };
+    session: {
+        main: IBaseStorage;
+        app: IBaseStorage;
+    };
 }
-declare function init(args: IInit): IInitR;
+declare function init(name: string): IInitR;
 export { init as initStorage };
-export type { IInit as IInitStorage, IInitR as IInitStorageR };
+export type { IInitR as IInitStorageR };

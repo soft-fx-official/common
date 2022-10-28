@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "prettier": "prettier --write \"src/**/*.{jsx,ts,tsx,json,md,yml,yaml}\"",
     "start": "react-app-rewired start",
-    "test": "react-app-rewired test"
+    "test": "react-app-rewired test",
+    "update:api:main": "npx swagger-typescript-api -p https://api.fxopen.co.uk/api/docs/v1/ -o ./src/services/api/ -n main.ts"
   },
   "browserslist": {
     "production": [
@@ -70,6 +71,7 @@
     "husky": "8.0.1",
     "lint-staged": "13.0.1",
     "prettier": "2.7.1",
-    "react-app-rewired": "2.2.1"
+    "react-app-rewired": "2.2.1",
+    "swagger-typescript-api": "9.3.1"
   }
 }

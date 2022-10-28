@@ -1,6 +1,7 @@
 import { IInitApp, initApp } from './app';
 import { IInitLocale, initLocale } from './locales';
 import { IInitState, IInitStateR, initState } from './state';
-import { IInitStorage, IInitStorageR, initStorage } from './storage';
-export { initApp, initLocale, initState, initStorage };
-export type { IInitApp, IInitLocale, IInitState, IInitStateR, IInitStorage, IInitStorageR };
+import { IInitStorageR, initStorage } from './storage';
+import { IInitApi, IInitApiR, initApi } from './api';
+export { initApp, initLocale, initState, initStorage, initApi };
+export type { IInitApp, IInitLocale, IInitState, IInitStateR, IInitStorageR, IInitApi, IInitApiR };
