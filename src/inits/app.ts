@@ -1,4 +1,5 @@
 import { i18n } from 'i18next'
+import { autorun, set, toJS } from 'mobx'
 
 import { IBus } from '../tools'
 import { IInitStateR } from './state'
@@ -19,12 +20,17 @@ async function init(
   bus.on('changeLanguage', args => i18next.changeLanguage(args?.lng))
   bus.on('toggleDarkTheme', () => {
     state.main.toggleDarkTheme()
-    storage.main.set('isDarkTheme', state.main.isDarkTheme)
-    storage.app.set('isDarkTheme', state.main.isDarkTheme)
+    storage.local.main.set('isDarkTheme', state.main.isDarkTheme)
   })
   bus.on('routing', args => {
     state.main.setRoute(args?.route)
   })
+
+  const sessionState = storage.session.app.get('state')
+  // @ts-ignore
+  if (sessionState) set(state.app, sessionState)
+  autorun(() => storage.session.app.set('state', toJS(state.app)))
+
   await inits({ storage, i18next, state, bus, api })
 }
 
