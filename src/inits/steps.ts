@@ -1,14 +1,12 @@
 import { IStep } from '../models/Step'
 import { IBus } from '../tools/bus'
 import StepsManager from '../tools/StepsManager'
-import { IInitStorageR } from './storage'
 
 interface IinitWorkStepsArgs {
   isRootApp: boolean
   appName: string
   steps?: IStep[]
   bus: IBus
-  storage: IInitStorageR
 }
 
 function initWorkSteps({ isRootApp, appName, steps, bus }: IinitWorkStepsArgs): void {
