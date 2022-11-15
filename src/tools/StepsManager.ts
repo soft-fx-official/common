@@ -57,8 +57,19 @@ export default class StepsManager {
         this.currentRootStep.nextSteps.length > 1
       ) {
         const possibleIds =
-          this.currentModuleStep?.nextSteps.join(', ') || this.currentRootStep.nextSteps.join(', ')
-        throw new Error(`Id needs to be passed. There are such id: ${possibleIds}`)
+          this.currentModuleStep?.nextSteps
+            .map(id => {
+              const { name } = this.getStepById(id, true)
+              return `${id}(${name})`
+            })
+            .join(', ') ||
+          this.currentRootStep.nextSteps
+            .map(id => {
+              const { name } = this.getStepById(id)
+              return `${id}(${name})`
+            })
+            .join(', ')
+        throw new Error(`Id needs to be passed. There are such id: ${possibleIds}.`)
       }
     }
 
