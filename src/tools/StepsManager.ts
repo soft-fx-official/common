@@ -1,4 +1,4 @@
-import { IStep } from '../models/Step'
+import { IStep } from '../models'
 import { parseRoute, updateRoute } from './route'
 
 export default class StepsManager {
