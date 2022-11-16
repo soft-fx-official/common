@@ -19,12 +19,13 @@ export default class StepsManager {
       this.historyModuleStep = JSON.parse(savedHistoryModuleStep)
     }
 
-    window.addEventListener('hashchange', () =>
+    window.addEventListener('hashchange', () => {
       window.sessionStorage.setItem(
         `${rootAppName}:historyModuleStep`,
         JSON.stringify(this.historyModuleStep),
-      ),
-    )
+      )
+      this.stepCheck()
+    })
 
     this.currentRootStep = this.initRootStep()
   }
@@ -147,6 +148,18 @@ export default class StepsManager {
       },
       reset,
     )
+  }
+
+  protected stepCheck(): void {
+    if (this.currentModuleStep) {
+      const idFromRoute = this.getStepIdFromRoute(this.currentRootStep.name)
+      if (!idFromRoute || idFromRoute !== this.currentModuleStep.id)
+        this.updateRoute(this.currentRootStep.name, this.currentModuleStep.id)
+    } else {
+      const idFromRoute = this.getStepIdFromRoute(this.rootAppName)
+      if (!idFromRoute || idFromRoute !== this.currentRootStep.id)
+        this.updateRoute(this.rootAppName, this.currentRootStep.id)
+    }
   }
 
   protected getStepIdFromRoute(appName: string): string | null {

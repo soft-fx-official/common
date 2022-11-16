@@ -16,6 +16,7 @@ export default class StepsManager {
     prevStep(): void;
     protected get routeData(): import("./route").TRouteData;
     protected updateRoute(appName: string, id: string, reset?: boolean): void;
+    protected stepCheck(): void;
     protected getStepIdFromRoute(appName: string): string | null;
     protected getStartStep(steps: IStep[]): IStep;
     protected hasSubSteps(step: IStep): boolean;
