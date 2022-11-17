@@ -9,7 +9,16 @@ type RedirectProps = {
 }
 
 const Redirect = ({ bus, to, param }: RedirectProps) => {
-  bus.say(to, param)
+  const prevDirection = bus.get('prevStepDirection')
+
+  if (prevDirection === 'prevStep' && to === 'nextStep') {
+    bus.say('prevStep')
+  } else if (prevDirection === 'nextStep' && to === 'prevStep') {
+    bus.say('nextStep', param)
+  } else {
+    bus.say(to, param)
+  }
+
   return null
 }
 

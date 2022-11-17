@@ -14,9 +14,15 @@ function initWorkSteps({ isRootApp, appName, steps, bus }: IinitWorkStepsArgs): 
     const stepManager = new StepsManager(appName, steps)
 
     bus.on('nextStep', args => {
+      bus.save('prevStepDirection', () => 'nextStep') // for Redirect component
       stepManager.nextStep(args?.id)
     })
-    bus.on('prevStep', () => stepManager.prevStep())
+
+    bus.on('prevStep', () => {
+      bus.save('prevStepDirection', () => 'prevStep') // for Redirect component
+      stepManager.prevStep()
+    })
+
     bus.on('addModuleSteps', args => {
       if (!args?.moduleName || !args?.steps)
         throw new Error('Required to pass moduleName and steps args')
