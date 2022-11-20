@@ -114,6 +114,8 @@ export default class StepsManager {
     }
 
     if (this.currentRootStep.prevStep) {
+      this.currentModuleStep = null
+
       this.currentRootStep = this.getStepById(this.currentRootStep.prevStep)
 
       this.updateRoute(this.rootAppName, this.currentRootStep.id, true)
@@ -151,14 +153,14 @@ export default class StepsManager {
   }
 
   protected stepCheck(): void {
+    const idRootStepFromRoute = this.getStepIdFromRoute(this.rootAppName)
+    if (!idRootStepFromRoute || idRootStepFromRoute !== this.currentRootStep.id)
+      this.updateRoute(this.rootAppName, this.currentRootStep.id)
+
     if (this.currentModuleStep) {
-      const idFromRoute = this.getStepIdFromRoute(this.currentRootStep.name)
-      if (!idFromRoute || idFromRoute !== this.currentModuleStep.id)
+      const idModuleStepFromRoute = this.getStepIdFromRoute(this.currentRootStep.name)
+      if (!idModuleStepFromRoute || idModuleStepFromRoute !== this.currentModuleStep.id)
         this.updateRoute(this.currentRootStep.name, this.currentModuleStep.id)
-    } else {
-      const idFromRoute = this.getStepIdFromRoute(this.rootAppName)
-      if (!idFromRoute || idFromRoute !== this.currentRootStep.id)
-        this.updateRoute(this.rootAppName, this.currentRootStep.id)
     }
   }
 
