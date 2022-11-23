@@ -56,8 +56,12 @@ async function init(args: IInitApp, initCurrentApp: TinitApp) {
 
   bus.on('toggleDarkTheme', () => {
     state.main.toggleDarkTheme()
-    storage.local.main.set('isDarkTheme', state.main.isDarkTheme)
   })
+  if (isRootApp) {
+    bus.on('toggleDarkTheme', () => {
+      storage.local.main.set('isDarkTheme', state.main.isDarkTheme)
+    })
+  }
 
   bus.on('routing', args => {
     state.main.setRoute(args?.route)
