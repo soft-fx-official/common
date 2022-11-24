@@ -8,7 +8,9 @@ interface IInitApp {
     state: IInitStateR;
     bus: IBus;
     api: any;
+    isRootApp: boolean;
 }
-declare function init({ storage, i18next, state, bus, api }: IInitApp, inits: ({ storage, i18next, state, bus, api }: IInitApp) => any): Promise<void>;
+declare type TinitApp = (args: IInitApp) => Promise<void>;
+declare function init(args: IInitApp, initCurrentApp: TinitApp): Promise<void>;
 export { init as initApp };
-export type { IInitApp };
+export type { IInitApp, TinitApp };
