@@ -55,8 +55,7 @@ class Main implements IMain {
 class App implements IApp {}
 
 function init(storage: IInitStorageR, state: IApp, isPrefersDarkMode?: boolean): IInitR {
-  const localStorageValue =
-    storage.local.main.get('isDarkTheme') || storage.local.app.get('isDarkTheme')
+  const localStorageValue = storage.local.main.get('isDarkTheme')
 
   const isDarkTheme = localStorageValue !== null ? localStorageValue : isPrefersDarkMode
 
