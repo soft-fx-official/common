@@ -1,12 +1,6 @@
 import { get, merge, set, unset } from 'lodash'
 
-type TStorageValue =
-  | string
-  | number
-  | boolean
-  | null
-  | Array<TStorageValue>
-  | { [key: string]: TStorageValue }
+type TStorageValue = any
 
 interface IStorage {
   setItem: (key: string, value: string) => void
