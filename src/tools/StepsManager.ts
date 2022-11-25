@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { IStep } from '../models'
 import { parseRoute, updateRoute } from './route'
 
@@ -9,7 +10,7 @@ export default class StepsManager {
   currentModuleStep: IStep | null = null
   historyModuleStep: { [moduleName: string]: IStep[] } = {}
 
-  constructor(rootAppName: string, rootSteps: IStep[]) {
+  constructor(rootAppName: string, rootSteps: IStep[], startStepId?: string) {
     this.rootAppName = rootAppName
     this.rootSteps = rootSteps
 
@@ -27,7 +28,7 @@ export default class StepsManager {
       this.stepCheck()
     })
 
-    this.currentRootStep = this.initRootStep()
+    this.currentRootStep = this.initRootStep(startStepId)
   }
 
   addModuleSteps(moduleName: string, steps: IStep[]): void {
@@ -204,7 +205,7 @@ export default class StepsManager {
     return step
   }
 
-  protected initRootStep(): IStep {
+  protected initRootStep(id?: string): IStep {
     const idStepFromRoute = this.getStepIdFromRoute(this.rootAppName)
 
     if (idStepFromRoute) {
@@ -215,7 +216,13 @@ export default class StepsManager {
       }
     }
 
-    const startStep = this.getStartStep(this.rootSteps)
+    let startStep
+
+    if (id) {
+      startStep = this.getStepById(id)
+    } else {
+      startStep = this.getStartStep(this.rootSteps)
+    }
 
     this.updateRoute(this.rootAppName, startStep.id, true)
 

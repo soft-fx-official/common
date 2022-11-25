@@ -1,6 +1,4 @@
-declare type TStorageValue = string | number | boolean | null | Array<TStorageValue> | {
-    [key: string]: TStorageValue;
-};
+declare type TStorageValue = any;
 interface IStorage {
     setItem: (key: string, value: string) => void;
     getItem: (key: string) => string | null;

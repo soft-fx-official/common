@@ -10,7 +10,7 @@ export default class StepsManager {
     historyModuleStep: {
         [moduleName: string]: IStep[];
     };
-    constructor(rootAppName: string, rootSteps: IStep[]);
+    constructor(rootAppName: string, rootSteps: IStep[], startStepId?: string);
     addModuleSteps(moduleName: string, steps: IStep[]): void;
     nextStep(id?: string): void;
     prevStep(): void;
@@ -21,7 +21,7 @@ export default class StepsManager {
     protected getStartStep(steps: IStep[]): IStep;
     protected hasSubSteps(step: IStep): boolean;
     protected getStepById(id: string, isModuleSteps?: boolean): IStep;
-    protected initRootStep(): IStep;
+    protected initRootStep(id?: string): IStep;
     protected initModuleStep(moduleName: string): void;
     protected popLastStepHistory(moduleName: string): IStep | null;
     protected pushStepToHistory(moduleName: string, step: IStep): void;

@@ -2,9 +2,20 @@ import { i18n } from 'i18next'
 import { autorun, set, toJS } from 'mobx'
 import { setLocale } from 'yup'
 
+import { IStep } from '../models'
 import { IBus } from '../tools'
 import { IInitStateR } from './state'
+import { initWorkSteps } from './steps'
 import { IInitStorageR } from './storage'
+
+interface Iconfig {
+  appName: string
+  theme: string
+  steps?: IStep[]
+  demoAccountStepId?: string
+  startStepId?: string
+  [key: string]: any
+}
 
 interface IInitApp {
   storage: IInitStorageR
@@ -13,12 +24,13 @@ interface IInitApp {
   bus: IBus
   api: any // NOTE: TS
   isRootApp: boolean
+  config: Iconfig
 }
 
 type TinitApp = (args: IInitApp) => Promise<void>
 
 async function init(args: IInitApp, initCurrentApp: TinitApp) {
-  const { storage, i18next, state, bus, api, isRootApp } = args
+  const { storage, i18next, state, bus, api, isRootApp, config } = args
 
   if (isRootApp) {
     window.addEventListener('hashchange', () => {
@@ -35,6 +47,8 @@ async function init(args: IInitApp, initCurrentApp: TinitApp) {
       storage.session.main.set('URLParams', URLSearchParameters)
     }
   }
+
+  initWorkSteps({ isRootApp, config, bus, storage })
 
   setLocale({
     mixed: {
@@ -76,4 +90,4 @@ async function init(args: IInitApp, initCurrentApp: TinitApp) {
 }
 
 export { init as initApp }
-export type { IInitApp, TinitApp }
+export type { Iconfig, IInitApp, TinitApp }
