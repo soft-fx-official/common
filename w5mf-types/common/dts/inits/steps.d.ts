@@ -1,11 +1,12 @@
-import { IStep } from '../models/Step';
 import { IBus } from '../tools/bus';
+import { Iconfig } from './app';
+import { IInitStorageR } from './storage';
 interface IinitWorkStepsArgs {
     isRootApp: boolean;
-    appName: string;
-    steps?: IStep[];
+    config: Iconfig;
     bus: IBus;
+    storage: IInitStorageR;
 }
-declare function initWorkSteps({ isRootApp, appName, steps, bus }: IinitWorkStepsArgs): void;
+declare function initWorkSteps(args: IinitWorkStepsArgs): void;
 export { initWorkSteps };
 export type { IinitWorkStepsArgs };
