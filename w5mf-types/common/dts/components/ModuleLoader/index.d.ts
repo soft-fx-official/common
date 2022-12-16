@@ -5,7 +5,7 @@ interface IModuleLoader {
     scope: string;
     module: string;
     bus: IBus | null;
-    onError: (error: any) => void;
+    onError: (message?: string) => void;
     onLoad: () => void;
     onDone: () => void;
 }
