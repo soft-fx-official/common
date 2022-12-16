@@ -9,30 +9,24 @@ interface IModuleLoader {
   scope: string
   module: string
   bus: IBus | null
-  onError: (error: any) => void
+  onError: (message?: string) => void
   onLoad: () => void
   onDone: () => void
 }
 
 const ModuleLoader: React.FC<IModuleLoader> = React.memo(
-  ({
-    url,
-    scope,
-    module,
-    bus,
-    onError = console.info,
-    onLoad = () => null,
-    onDone = () => null,
-  }) => {
+  ({ url, scope, module, bus, onError, onLoad = () => null, onDone = () => null }) => {
     const { ready, failed } = useDynamicScript(url)
 
     if (!url || !scope || !module) {
-      onError('Not system specified')
+      console.info('[ModuleLoader]: Not system specified')
+      onError()
       return null
     }
 
     if (failed) {
-      onError(`Failed to load dynamic script: ${url}`)
+      console.info(`[ModuleLoader]: Failed to load dynamic script: ${url}`)
+      onError()
       return null
     }
 

@@ -7,7 +7,7 @@ function init(config: IInitApi, storage: IInitStorageR, bus: IBus): IInitApiR {
     { baseUrl: config.main.baseUrl },
     makeTokenManager(storage),
     (response: Response) => {
-      bus.say('serverError', response)
+      bus.say('error', { message: response.statusText })
     },
   )
 
