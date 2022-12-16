@@ -1,6 +1,4 @@
-declare type TStorageValue = string | number | boolean | null | Array<TStorageValue> | {
-    [key: string]: TStorageValue;
-};
+declare type TStorageValue = any;
 interface IStorage {
     setItem: (key: string, value: string) => void;
     getItem: (key: string) => string | null;
@@ -22,6 +20,7 @@ declare class BaseStorage implements IBaseStorage {
     set(path: string, value: TStorageValue): this;
     remove(path: string): this;
     clear(): this;
+    protected syncDataWithStorage(): void;
 }
 export { BaseStorage as Storage };
 export type { IBaseStorage, IStorage, TStorageValue };

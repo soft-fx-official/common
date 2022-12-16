@@ -6,5 +6,6 @@ module.exports = {
     './inits': './src/inits',
     './components': './src/components',
     './services/api/main': './src/services/api/main.ts',
+    './models': './src/models',
   },
 }

@@ -28,7 +28,7 @@ module.exports = {
           },
         },
       }),
-      new W5MFTypesGeneratePlugin(),
+      new W5MFTypesGeneratePlugin({ appName: config.appName }),
     ];
 
     webpackConfig.module.rules = [

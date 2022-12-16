@@ -1,0 +1,30 @@
+.transition,
+.transition [class*='MuiDrawer-paper'],
+.transition [class*='MuiSelect-icon'] {
+  transition: color 1.5s, background-color 1.5s, background 1.5s, border-color 1.5s,
+    text-decoration-color 1.5s !important;
+  -webkit-transition: color 1.5s, background-color 1.5s, background 1.5s, border-color 1.5s,
+    text-decoration-color 1.5s !important;
+}
+
+.transition [class*='MuiTypography-root']:not(:has(h6[class*='MuiTypography-root'])),
+.transition [class*='MuiOutlinedInput-root'] {
+  transition: color 1.5s !important;
+  -webkit-transition: color 1.5s !important;
+}
+
+.transition [class*='MuiSvgIcon-root'] {
+  transition: color 1.5s !important;
+  -webkit-transition: color 1.5s !important;
+}
+
+.transition [class*='MuiTooltip-tooltip'],
+.transition [class*='MuiTooltip-tooltip'] > [class*='MuiTooltip-arrow'] {
+  transition: background-color 1.5s, background 1.5s, border-color 1.5s !important;
+  -webkit-transition: background-color 1.5s, background 1.5s, border-color 1.5s !important;
+}
+
+.transition input[class*='MuiInputBase-input']:-webkit-autofill {
+  transition: color 1.5s, -webkit-text-fill-color 1.5s, -webkit-box-shadow 1.5s !important;
+  -webkit-transition: color 1.5s, -webkit-text-fill-color 1.5s, -webkit-box-shadow 1.5s !important;
+}
