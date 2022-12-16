@@ -1,12 +1,6 @@
-import { get, set, unset } from 'lodash'
+import { get, merge, set, unset } from 'lodash'
 
-type TStorageValue =
-  | string
-  | number
-  | boolean
-  | null
-  | Array<TStorageValue>
-  | { [key: string]: TStorageValue }
+type TStorageValue = any
 
 interface IStorage {
   setItem: (key: string, value: string) => void
@@ -36,8 +30,9 @@ class BaseStorage implements IBaseStorage {
     this.namespace = namespace
     this.storage = storage
     this.data = {}
+
     try {
-      this.data = JSON.parse(this.storage.getItem(namespace) as string) || {}
+      this.syncDataWithStorage()
     } catch (e) {
       console.info('[STORAGE][ERROR]: ', e)
       this.clear()
@@ -46,6 +41,13 @@ class BaseStorage implements IBaseStorage {
 
   get(path: string): TStorageValue {
     console.info(`[STORAGE][GET]: ${path}`)
+
+    try {
+      this.syncDataWithStorage()
+    } catch (e) {
+      console.info('[STORAGE][ERROR]: ', e)
+    }
+
     return get(this.data, path, null)
   }
 
@@ -53,7 +55,7 @@ class BaseStorage implements IBaseStorage {
     console.info(`[STORAGE][SET]: ${path}`)
     set(this.data, path, value)
     try {
-      this.storage.setItem(this.namespace, JSON.stringify(this.data))
+      this.syncDataWithStorage()
     } catch (e) {
       console.info('[STORAGE][ERROR]: ', e)
     }
@@ -62,8 +64,11 @@ class BaseStorage implements IBaseStorage {
 
   remove(path: string): this {
     console.info(`[STORAGE][REMOVE]: ${path}`)
-    unset(this.data, path)
     try {
+      this.syncDataWithStorage()
+
+      unset(this.data, path)
+
       this.storage.setItem(this.namespace, JSON.stringify(this.data))
     } catch (e) {
       console.info('[STORAGE][ERROR]: ', e)
@@ -76,6 +81,14 @@ class BaseStorage implements IBaseStorage {
     this.data = {}
     this.storage.clear()
     return this
+  }
+
+  protected syncDataWithStorage() {
+    const dataFromStorage = JSON.parse(this.storage.getItem(this.namespace) as string) || {}
+
+    this.data = merge(dataFromStorage, this.data)
+
+    this.storage.setItem(this.namespace, JSON.stringify(this.data))
   }
 }
 

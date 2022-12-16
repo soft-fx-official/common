@@ -50,8 +50,8 @@
     "react-i18next": "11.17.1",
     "react-scripts": "5.0.1",
     "typescript": "4.7.3",
-    "yup": "0.32.11",
-    "w5mf-types-generate": "0.1.x"
+    "w5mf-types-generate": "0.2.x",
+    "yup": "0.32.11"
   },
   "devDependencies": {
     "@types/lodash": "4.14.182",
