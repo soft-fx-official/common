@@ -15,3 +15,7 @@
 .vscode
 *.local
 *.log
+
+# project
+/w5mf-types
+w5mf-types.tar
