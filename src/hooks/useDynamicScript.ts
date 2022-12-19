@@ -14,7 +14,7 @@ const useDynamicScript = (url: string): IUseDynamicScriptR => {
 
     const element = document.createElement('script')
 
-    element.src = url
+    element.src = `${url}?${Math.floor(Date.now())}`
     element.type = 'text/javascript'
     element.async = true
 
